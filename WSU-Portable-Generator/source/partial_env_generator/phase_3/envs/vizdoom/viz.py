@@ -69,6 +69,33 @@ class SailonViz:
 
             self.bucket_vals = np.arange(-512, 512, step=1023.9 / buckets)
 
+        # parameters for pacmartech novelties
+        self.health_lost_on_turn_end = 0
+        self.ammo_lost_on_turn_end = 0
+        self.increased_tick_time = 0
+
+        if self.level == 301:
+            if self.difficulty == 'easy':
+                self.health_lost_on_turn_end = 1
+            elif self.difficulty == 'medium':
+                self.health_lost_on_turn_end = 1
+            elif self.difficulty == 'hard':
+                self.health_lost_on_turn_end = 1
+        elif self.level == 302:
+            if self.difficulty == 'easy':
+                self.ammo_lost_on_turn_end = 1
+            elif self.difficulty == 'medium':
+                self.ammo_lost_on_turn_end = 1
+            elif self.difficulty == 'hard':
+                self.ammo_lost_on_turn_end = 1
+        elif self.level == 303:
+            if self.difficulty == 'easy':
+                self.increased_tick_time = 1
+            elif self.difficulty == 'medium':
+                self.increased_tick_time = 1
+            elif self.difficulty == 'hard':
+                self.increased_tick_time = 1
+
         # Decide on agent behvoiur here
         self.Agents = Agents(self.level, self.difficulty, self.use_mock)
 
@@ -132,9 +159,9 @@ class SailonViz:
 
         return None
 
-    def step(self, action):
+    def step(self, action_name):
         # Decode action
-        action = self.actions[action]
+        action = self.actions[action_name]
 
         # Set agent behavoiur before making the action (which calls an ingame update)
         # Returns a string array, use as commands in vizdoom
@@ -146,7 +173,10 @@ class SailonViz:
         self.game.make_action(action)
 
         # Update counter
-        self.tick = self.tick + 1
+        self.tick = self.tick + 1 + self.increased_tick_time
+        
+        self.game.send_game_command(f"puke {8} {self.health_lost_on_turn_end}")
+        self.game.send_game_command(f"puke {9} {self.ammo_lost_on_turn_end}")
 
         # Calculate performance
         self.performance = (self.step_limit - self.tick) / self.step_limit

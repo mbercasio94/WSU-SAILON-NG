@@ -148,6 +148,7 @@ NOVELTY_105 = 105  # Phase 2 mock novelty level 5
 NOVELTY_106 = 106  # Phase 3 mock novelty level 6
 NOVELTY_107 = 107  # Phase 3 mock novelty level 7
 NOVELTY_108 = 108  # Phase 3 mock novelty level 8
+NOVELTY_111 = 111
 NOVELTY_200 = 200  # Phase 2 level 0 (non-novel)
 NOVELTY_201 = 201  # Phase 2 level 1
 NOVELTY_202 = 202  # Phase 2 level 2
@@ -157,6 +158,12 @@ NOVELTY_205 = 205  # Phase 2 level 5
 NOVELTY_206 = 206  # Phase 3 level 6
 NOVELTY_207 = 207  # Phase 3 level 7
 NOVELTY_208 = 208  # Phase 3 level 7
+NOVELTY_301 = 301  # Phase 3 PacMarTech 1
+NOVELTY_302 = 302  # Phase 3 PacMarTech 2
+NOVELTY_303 = 303  # Phase 3 PacMarTech 3
+NOVELTY_304 = 304  # Phase 3 PacMarTech 4
+NOVELTY_305 = 305  # Phase 3 PacMarTech 5
+NOVELTY_306 = 306  # Phase 3 PacMarTech 6
 VALID_NOVELTY = list([NOVELTY_200,
                       NOVELTY_1,
                       NOVELTY_2,
@@ -173,6 +180,7 @@ VALID_NOVELTY = list([NOVELTY_200,
                       NOVELTY_106,
                       NOVELTY_107,
                       NOVELTY_108,
+                      NOVELTY_111,
                       NOVELTY_201,
                       NOVELTY_202,
                       NOVELTY_203,
@@ -180,7 +188,13 @@ VALID_NOVELTY = list([NOVELTY_200,
                       NOVELTY_205,
                       NOVELTY_206,
                       NOVELTY_207,
-                      NOVELTY_208])
+                      NOVELTY_208,
+                      NOVELTY_301,
+                      NOVELTY_302,
+                      NOVELTY_303,
+                      NOVELTY_304,
+                      NOVELTY_305,
+                      NOVELTY_306])
 TESTING_NOVELTY = list([NOVELTY_200,
                         NOVELTY_1,
                         NOVELTY_2,
@@ -197,6 +211,7 @@ TESTING_NOVELTY = list([NOVELTY_200,
                         NOVELTY_106,
                         NOVELTY_107,
                         NOVELTY_108,
+                        NOVELTY_111,
                         NOVELTY_201,
                         NOVELTY_202,
                         NOVELTY_203,
@@ -204,7 +219,13 @@ TESTING_NOVELTY = list([NOVELTY_200,
                         NOVELTY_205,
                         NOVELTY_206,
                         NOVELTY_207,
-                        NOVELTY_208])
+                        NOVELTY_208,
+                        NOVELTY_301,
+                        NOVELTY_302,
+                        NOVELTY_303,
+                        NOVELTY_304,
+                        NOVELTY_305,
+                        NOVELTY_306])
 DIFFICULTY_EASY = 'easy'
 DIFFICULTY_MEDIUM = 'medium'
 DIFFICULTY_HARD = 'hard'
@@ -269,7 +290,13 @@ PHASE_NOVELTY_LISTS = dict({PHASE_1: list([NOVELTY_200,
                                            NOVELTY_202,
                                            NOVELTY_203,
                                            NOVELTY_204,
-                                           NOVELTY_205]),
+                                           NOVELTY_205,
+                                           NOVELTY_301,
+                                           NOVELTY_302,
+                                           NOVELTY_303,
+                                           NOVELTY_304,
+                                           NOVELTY_305,
+                                           NOVELTY_306]),
                             PHASE_3: list([NOVELTY_200,
                                            NOVELTY_50,
                                            NOVELTY_51,
@@ -283,6 +310,7 @@ PHASE_NOVELTY_LISTS = dict({PHASE_1: list([NOVELTY_200,
                                            NOVELTY_106,
                                            NOVELTY_107,
                                            NOVELTY_108,
+                                           NOVELTY_111,
                                            NOVELTY_201,
                                            NOVELTY_202,
                                            NOVELTY_203,
@@ -290,7 +318,13 @@ PHASE_NOVELTY_LISTS = dict({PHASE_1: list([NOVELTY_200,
                                            NOVELTY_205,
                                            NOVELTY_206,
                                            NOVELTY_207,
-                                           NOVELTY_208]),
+                                           NOVELTY_208,
+                                           NOVELTY_301,
+                                           NOVELTY_302,
+                                           NOVELTY_303,
+                                           NOVELTY_304,
+                                           NOVELTY_305,
+                                           NOVELTY_306]),
                             PHASE_4A: list([NOVELTY_200,
                                             NOVELTY_50,
                                             NOVELTY_51,
@@ -311,7 +345,13 @@ PHASE_NOVELTY_LISTS = dict({PHASE_1: list([NOVELTY_200,
                                             NOVELTY_205,
                                             NOVELTY_206,
                                             NOVELTY_207,
-                                            NOVELTY_208]),
+                                            NOVELTY_208,
+                                            NOVELTY_301,
+                                            NOVELTY_302,
+                                            NOVELTY_303,
+                                            NOVELTY_304,
+                                            NOVELTY_305,
+                                            NOVELTY_306]),
                             PHASE_4B: list([NOVELTY_200,
                                             NOVELTY_50,
                                             NOVELTY_51,
@@ -332,7 +372,13 @@ PHASE_NOVELTY_LISTS = dict({PHASE_1: list([NOVELTY_200,
                                             NOVELTY_205,
                                             NOVELTY_206,
                                             NOVELTY_207,
-                                            NOVELTY_208])
+                                            NOVELTY_208,
+                                            NOVELTY_301,
+                                            NOVELTY_302,
+                                            NOVELTY_303,
+                                            NOVELTY_304,
+                                            NOVELTY_305,
+                                            NOVELTY_306])
                             })
 
 # AIQ Queues

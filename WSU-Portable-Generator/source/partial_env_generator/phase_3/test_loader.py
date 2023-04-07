@@ -53,6 +53,9 @@ class TestLoader:
             self.use_mock = True
         elif self.novelty_level in [201, 202, 203, 204, 205]:
             self.use_novel = True
+        elif self.novelty_level in [301, 302, 303, 304, 305, 306] and self.domain == 'vizdoom':
+            #PacMarTech implemented novelties
+            self.use_novel = True
         elif self.novelty_level in [206, 207, 208]:
             print("WARNING! NOT ALL NOVELTIES REVEALED!")
         elif self.novelty_level in [200]:
