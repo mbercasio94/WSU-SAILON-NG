@@ -38,22 +38,6 @@ services:
       - rabbit
       - pgdb
 
-  # The cartpole service.
-  # We use a custom service name for each service variant so we can have multiple versions
-  # running at the same time, just with slightly modified docker-compose files.
-  mockn-gen-cartpole:
-    build:
-      context: ./
-      dockerfile: Dockerfile-PARTIAL-GENERATOR
-    command: python -u GENERATOR.py --domain=cartpole --config=config/generator.config --printout
-    restart: always
-    links:
-      - rabbit
-    depends_on:
-      - rabbit
-      - pgdb
-      - mockn-ta1
-
   # The vizdoom service.
   # We use a custom service name for each service variant so we can have multiple versions
   # running at the same time, just with slightly modified docker-compose files.
@@ -73,15 +57,16 @@ services:
   # The TA2 demo agent.
   # We use a custom service name for each service variant so we can have multiple versions
   # running at the same time, just with slightly modified docker-compose files.
-  mockn-demo-ta2:
+  # Sample Agent
+  vizdoom-sota:
     # The volume we mount determines which config files will be available to the services.
     volumes:
-      - ./configs/partial:/aiq-sail-on/config:rw
+      - ./configs/demo:/aiq-sail-on/config:rw
       - ./logs:/aiq-sail-on/logs:rw
     build:
-      context: ./
-      dockerfile: Dockerfile-PARTIAL-TA2
-    command: python -u TA2.py --config=config/demo-client.config --printout
+      context: .
+      dockerfile: Dockerfile-SOTA-agent
+    command: python -u SOTA-vizdoom.py --config=config/demo-vizdoom.config --printout --logfile=logs/log.txt
     links:
       - rabbit
     depends_on:

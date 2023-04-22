@@ -72,7 +72,7 @@ class SailonViz:
         # parameters for pacmartech novelties
         self.health_lost_on_turn_end = 0
         self.ammo_lost_on_turn_end = 0
-        self.increased_tick_time = 0
+        self.angle_change_on_turn_end = 0
 
         if self.level == 301:
             if self.difficulty == 'easy':
@@ -90,11 +90,11 @@ class SailonViz:
                 self.ammo_lost_on_turn_end = 1
         elif self.level == 303:
             if self.difficulty == 'easy':
-                self.increased_tick_time = 1
+                self.angle_change_on_turn_end = .05
             elif self.difficulty == 'medium':
-                self.increased_tick_time = 1
+                self.angle_change_on_turn_end = .05
             elif self.difficulty == 'hard':
-                self.increased_tick_time = 1
+                self.angle_change_on_turn_end = .05
 
         # Decide on agent behvoiur here
         self.Agents = Agents(self.level, self.difficulty, self.use_mock)
@@ -173,10 +173,13 @@ class SailonViz:
         self.game.make_action(action)
 
         # Update counter
-        self.tick = self.tick + 1 + self.increased_tick_time
+        self.tick = self.tick + 1
         
-        self.game.send_game_command(f"puke {8} {self.health_lost_on_turn_end}")
-        self.game.send_game_command(f"puke {9} {self.ammo_lost_on_turn_end}")
+        # Set to every 10 ticks so it's not impossible
+        if self.tick % 10 == 0:
+            self.game.send_game_command(f"puke {21} {self.health_lost_on_turn_end}")
+            self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
+            self.game.send_game_command(f"puke {23} {self.angle_change_on_turn_end}")
 
         # Calculate performance
         self.performance = (self.step_limit - self.tick) / self.step_limit
