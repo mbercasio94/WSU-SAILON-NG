@@ -95,7 +95,7 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.ammo_lost_on_turn_end = 1
         elif self.level == 303:
-            self.novelty_tick_delta = 1
+            self.novelty_tick_delta = 10
             if self.difficulty == 'easy':
                 self.angle_change_on_turn_end = .25
             elif self.difficulty == 'medium':
@@ -186,7 +186,7 @@ class SailonViz:
         if self.tick % self.novelty_tick_delta == 0:
             self.game.send_game_command(f"puke {21} {self.health_lost_on_turn_end}")
             self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
-            self.game.send_game_command(f"puke {23} {self.angle_change_on_turn_end}")
+            self.game.send_game_command(f"puke {23}")
 
         # Calculate performance
         self.performance = (self.step_limit - self.tick) / self.step_limit
