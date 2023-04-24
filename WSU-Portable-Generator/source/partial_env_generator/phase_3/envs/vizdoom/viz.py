@@ -74,7 +74,12 @@ class SailonViz:
         self.ammo_lost_on_turn_end = 0
         self.angle_change_on_turn_end = 0
 
+        # number of ticks before custom novelties that effect turn endings are sent to game
+        # we vary this between novelties to increase fairness 
+        self.novelty_tick_delta = 1
+
         if self.level == 301:
+            self.novelty_tick_delta = 5
             if self.difficulty == 'easy':
                 self.health_lost_on_turn_end = 1
             elif self.difficulty == 'medium':
@@ -82,6 +87,7 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.health_lost_on_turn_end = 1
         elif self.level == 302:
+            self.novelty_tick_delta = 10
             if self.difficulty == 'easy':
                 self.ammo_lost_on_turn_end = 1
             elif self.difficulty == 'medium':
@@ -89,6 +95,7 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.ammo_lost_on_turn_end = 1
         elif self.level == 303:
+            self.novelty_tick_delta = 1
             if self.difficulty == 'easy':
                 self.angle_change_on_turn_end = .05
             elif self.difficulty == 'medium':
@@ -175,8 +182,8 @@ class SailonViz:
         # Update counter
         self.tick = self.tick + 1
         
-        # Set to every 10 ticks so it's not impossible
-        if self.tick % 10 == 0:
+        # Set to every n ticks so it's not impossible
+        if self.tick % self.novelty_tick_delta == 0:
             self.game.send_game_command(f"puke {21} {self.health_lost_on_turn_end}")
             self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
             self.game.send_game_command(f"puke {23} {self.angle_change_on_turn_end}")
