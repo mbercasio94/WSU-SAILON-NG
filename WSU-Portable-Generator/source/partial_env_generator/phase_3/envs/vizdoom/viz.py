@@ -97,11 +97,11 @@ class SailonViz:
         elif self.level == 303:
             self.novelty_tick_delta = 1
             if self.difficulty == 'easy':
-                self.angle_change_on_turn_end = .05
+                self.angle_change_on_turn_end = .25
             elif self.difficulty == 'medium':
-                self.angle_change_on_turn_end = .05
+                self.angle_change_on_turn_end = .25
             elif self.difficulty == 'hard':
-                self.angle_change_on_turn_end = .05
+                self.angle_change_on_turn_end = .25
 
         # Decide on agent behvoiur here
         self.Agents = Agents(self.level, self.difficulty, self.use_mock)
