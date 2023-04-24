@@ -95,7 +95,7 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.ammo_lost_on_turn_end = 1
         elif self.level == 303:
-            self.novelty_tick_delta = 10
+            self.novelty_tick_delta = 5
             if self.difficulty == 'easy':
                 self.angle_change_on_turn_end = .25
             elif self.difficulty == 'medium':
