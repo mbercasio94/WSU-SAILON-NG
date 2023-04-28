@@ -203,8 +203,7 @@ class SailonViz:
             elif self.level == 302:
                 self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
             elif self.level == 303:
-                if self.angle_change_on_turn_end > 0:
-                    self.game.send_game_command(f"puke {23}")
+                self.game.send_game_command(f"puke {23}")
 
         #print(action_name)
         if (action_name == 'turn_right' or action_name == 'turn_left') and self.level == 304:
