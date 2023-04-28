@@ -25,7 +25,7 @@ class SailonViz:
         self.use_novel = use_novel
         self.level = level
         self.use_img = use_img
-        self.seed = seed
+        self.seed = 10
         self.difficulty = difficulty
         self.path = path
 
@@ -72,14 +72,16 @@ class SailonViz:
         # parameters for pacmartech novelties
         self.health_lost_on_turn_end = 0
         self.ammo_lost_on_turn_end = 0
-        self.angle_change_on_turn_end = 0
+
+        self.health_lost_on_rotate = 0
+        self.health_lost_on_shift = 0
 
         # number of ticks before custom novelties that effect turn endings are sent to game
         # we vary this between novelties to increase fairness 
         self.novelty_tick_delta = 1
 
         if self.level == 301:
-            self.novelty_tick_delta = 5
+            self.novelty_tick_delta = 7
             if self.difficulty == 'easy':
                 self.health_lost_on_turn_end = 1
             elif self.difficulty == 'medium':
@@ -87,7 +89,7 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.health_lost_on_turn_end = 1
         elif self.level == 302:
-            self.novelty_tick_delta = 10
+            self.novelty_tick_delta = 40
             if self.difficulty == 'easy':
                 self.ammo_lost_on_turn_end = 1
             elif self.difficulty == 'medium':
@@ -95,13 +97,25 @@ class SailonViz:
             elif self.difficulty == 'hard':
                 self.ammo_lost_on_turn_end = 1
         elif self.level == 303:
-            self.novelty_tick_delta = 5
+            self.novelty_tick_delta = 3
+            # handled in step function
+        elif self.level == 304:
             if self.difficulty == 'easy':
-                self.angle_change_on_turn_end = .25
+                self.health_lost_on_rotate = 2
             elif self.difficulty == 'medium':
-                self.angle_change_on_turn_end = .25
+                self.health_lost_on_rotate = 2
             elif self.difficulty == 'hard':
-                self.angle_change_on_turn_end = .25
+                self.health_lost_on_rotate = 2
+        elif self.level == 305:
+            if self.difficulty == 'easy':
+                self.health_lost_on_shift = 1
+            elif self.difficulty == 'medium':
+                self.health_lost_on_shift = 1
+            elif self.difficulty == 'hard':
+                self.health_lost_on_shift = 1
+        elif self.level == 306:
+            pass
+            # handled in step function
 
         # Decide on agent behvoiur here
         self.Agents = Agents(self.level, self.difficulty, self.use_mock)
@@ -184,9 +198,21 @@ class SailonViz:
         
         # Set to every n ticks so it's not impossible
         if self.tick % self.novelty_tick_delta == 0:
-            self.game.send_game_command(f"puke {21} {self.health_lost_on_turn_end}")
-            self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
-            self.game.send_game_command(f"puke {23}")
+            if self.level == 301:
+                self.game.send_game_command(f"puke {21} {self.health_lost_on_turn_end}")
+            elif self.level == 302:
+                self.game.send_game_command(f"puke {22} {self.ammo_lost_on_turn_end}")
+            elif self.level == 303:
+                if self.angle_change_on_turn_end > 0:
+                    self.game.send_game_command(f"puke {23}")
+
+        #print(action_name)
+        if (action_name == 'turn_right' or action_name == 'turn_left') and self.level == 304:
+            self.game.send_game_command(f"puke {21} {self.health_lost_on_rotate}")
+        elif (action_name == 'forward' or action_name == 'backward' or action_name == 'left' or action_name == 'right') and self.level == 305:
+            self.game.send_game_command(f"puke {21} {self.health_lost_on_shift}")
+        elif (action_name == 'turn_right' or action_name == 'turn_left') and self.level == 306:
+            self.game.send_game_command(f"puke {24}")
 
         # Calculate performance
         self.performance = (self.step_limit - self.tick) / self.step_limit
